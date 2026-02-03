@@ -13,11 +13,14 @@
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
   }
 
   .container {
     text-align: center;
-    width: 320px; /* same visual width as image */
+    width: 320px;
+    position: relative;
+    z-index: 2;
   }
 
   h1 {
@@ -36,7 +39,7 @@
     display: flex;
     justify-content: center;
     gap: 30px;
-    height: 60px;
+    height: 70px;
   }
 
   button {
@@ -50,11 +53,35 @@
   #yes {
     background-color: #ff4d6d;
     color: white;
+    z-index: 1;
   }
 
   #no {
     background-color: #aaa;
-    position: relative;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 22px;
+    animation: floatUp 4s linear forwards;
+    opacity: 0.8;
+    z-index: 1;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-110vh);
+      opacity: 0;
+    }
   }
 </style>
 </head>
@@ -64,9 +91,9 @@
 <div class="container">
   <h1>Will you be my Valentine? 💘</h1>
 
-  <!-- ACTUAL cute puppy + flowers GIF -->
+  <!-- KEEPING THE GIF -->
   <img
-    src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2R6Z2M4a3B1N3Z0cXV6a2E3aWJ5dDN6cXptNTRzYmZ1ZW4yZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26FLdmIp6wJr91JAI/giphy.gif"
+    src="https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif"
     alt="Cute puppy with flowers"
   >
 
@@ -79,11 +106,27 @@
 <script>
   const noBtn = document.getElementById("no");
 
-  noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * 120 - 60;
-    const y = Math.random() * 40 - 20;
+  function moveNoButton() {
+    const x = Math.random() * 240 - 120;
+    const y = Math.random() * 60 - 30;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  });
+  }
+
+  // Dodge EVERYTHING
+  noBtn.addEventListener("mouseover", moveNoButton);
+  noBtn.addEventListener("mousedown", moveNoButton);
+  noBtn.addEventListener("touchstart", moveNoButton);
+
+  // Floating hearts generator
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }, 500);
 </script>
 
 </body>
