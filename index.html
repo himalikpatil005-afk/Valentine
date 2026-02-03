@@ -8,12 +8,12 @@
   body {
     background: #ffe6ec;
     font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
   }
 
   .container {
@@ -31,45 +31,42 @@
   img {
     width: 100%;
     border-radius: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
 
   .buttons {
     position: relative;
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 25px;
     height: 70px;
   }
 
   button {
-    padding: 12px 26px;
+    width: 120px;
+    height: 55px;
     font-size: 18px;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     cursor: pointer;
   }
 
   #yes {
     background-color: #ff4d6d;
     color: white;
-    z-index: 1;
   }
 
   #no {
     background-color: #aaa;
-    position: absolute;
-    right: 0;
-    z-index: 1;
   }
 
   /* Floating hearts */
   .heart {
     position: fixed;
-    bottom: -20px;
-    font-size: 22px;
-    animation: floatUp 4s linear forwards;
-    opacity: 0.8;
+    bottom: -30px;
+    font-size: 18px;
+    animation: floatUp linear forwards;
+    pointer-events: none;
     z-index: 1;
   }
 
@@ -91,13 +88,12 @@
 <div class="container">
   <h1>Will you be my Valentine? 💘</h1>
 
-  <!-- KEEPING THE GIF -->
   <img
     src="https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif"
     alt="Cute puppy with flowers"
   >
 
-  <div class="buttons">
+  <div class="buttons" id="btnArea">
     <button id="yes" onclick="alert('YAY 💖 I knew it!!!')">Yes</button>
     <button id="no">No</button>
   </div>
@@ -105,28 +101,40 @@
 
 <script>
   const noBtn = document.getElementById("no");
+  const btnArea = document.getElementById("btnArea");
+  let activated = false;
 
-  function moveNoButton() {
-    const x = Math.random() * 240 - 120;
+  function moveNo() {
+    if (!activated) {
+      activated = true;
+      noBtn.style.position = "absolute";
+    }
+
+    const x = Math.random() * 200 - 100;
     const y = Math.random() * 60 - 30;
+
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   }
 
-  // Dodge EVERYTHING
-  noBtn.addEventListener("mouseover", moveNoButton);
-  noBtn.addEventListener("mousedown", moveNoButton);
-  noBtn.addEventListener("touchstart", moveNoButton);
+  noBtn.addEventListener("mouseover", moveNo);
+  noBtn.addEventListener("mousedown", moveNo);
+  noBtn.addEventListener("touchstart", moveNo);
 
-  // Floating hearts generator
+  /* EXTRA floating hearts */
   setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💗";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
+    for (let i = 0; i < 3; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 16 + "px";
+      heart.style.opacity = Math.random() * 0.6 + 0.4;
+      heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+      document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 4000);
-  }, 500);
+      setTimeout(() => heart.remove(), 6000);
+    }
+  }, 300);
 </script>
 
 </body>
