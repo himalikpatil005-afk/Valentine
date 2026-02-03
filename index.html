@@ -17,6 +17,7 @@
 
   .container {
     text-align: center;
+    width: 320px; /* same visual width as image */
   }
 
   h1 {
@@ -25,18 +26,21 @@
   }
 
   img {
-    width: 260px;
+    width: 100%;
     border-radius: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
 
   .buttons {
     position: relative;
-    height: 120px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    height: 60px;
   }
 
   button {
-    padding: 12px 28px;
+    padding: 12px 26px;
     font-size: 18px;
     border: none;
     border-radius: 12px;
@@ -46,14 +50,11 @@
   #yes {
     background-color: #ff4d6d;
     color: white;
-    margin-right: 20px;
   }
 
   #no {
     background-color: #aaa;
-    position: absolute;
-    left: 160px;
-    top: 0;
+    position: relative;
   }
 </style>
 </head>
@@ -63,8 +64,9 @@
 <div class="container">
   <h1>Will you be my Valentine? 💘</h1>
 
-  <img 
-    src="https://images.unsplash.com/photo-1601758123927-196e2b1a56c5?w=500" 
+  <!-- ACTUAL cute puppy + flowers GIF -->
+  <img
+    src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2R6Z2M4a3B1N3Z0cXV6a2E3aWJ5dDN6cXptNTRzYmZ1ZW4yZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26FLdmIp6wJr91JAI/giphy.gif"
     alt="Cute puppy with flowers"
   >
 
@@ -78,8 +80,8 @@
   const noBtn = document.getElementById("no");
 
   noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 80;
+    const x = Math.random() * 120 - 60;
+    const y = Math.random() * 40 - 20;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
 </script>
