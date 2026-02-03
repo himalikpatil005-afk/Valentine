@@ -38,7 +38,11 @@
 
 <body>
   <h1>Will you be my Valentine? 💘</h1>
-  <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=500" alt="Puppy love">
+  <img 
+  src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif?valentine=1" 
+  alt="Cute puppy with flowers"
+  style="width:260px;border-radius:20px;"
+  >
   <br><br>
   <button id="yes" onclick="alert('YAY 💖 I knew it!!!')">Yes</button>
   <button id="no">No</button>
@@ -50,5 +54,27 @@
     noBtn.style.top = Math.random() * 80 + "vh";
   });
 </script>
+  <script>
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💗";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "100vh";
+    heart.style.fontSize = "24px";
+    heart.style.animation = "floatUp 4s linear";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }, 500);
+</script>
+
+<style>
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+
 </body>
 </html>
