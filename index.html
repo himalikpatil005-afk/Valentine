@@ -3,78 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <title>Be My Valentine 💘</title>
+
 <style>
   body {
     background: #ffe6ec;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    padding-top: 40px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
   }
+
+  .container {
+    text-align: center;
+  }
+
   h1 {
     color: #ff4d6d;
+    margin-bottom: 20px;
   }
+
   img {
-    width: 250px;
+    width: 260px;
     border-radius: 20px;
+    margin-bottom: 30px;
   }
+
+  .buttons {
+    position: relative;
+    height: 120px;
+  }
+
   button {
-    padding: 12px 25px;
+    padding: 12px 28px;
     font-size: 18px;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
-    margin: 15px;
   }
+
   #yes {
     background-color: #ff4d6d;
     color: white;
+    margin-right: 20px;
   }
+
   #no {
-    background-color: #999;
+    background-color: #aaa;
     position: absolute;
+    left: 160px;
+    top: 0;
   }
 </style>
 </head>
 
 <body>
+
+<div class="container">
   <h1>Will you be my Valentine? 💘</h1>
+
   <img 
-  src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif?valentine=1" 
-  alt="Cute puppy with flowers"
-  style="width:260px;border-radius:20px;"
+    src="https://images.unsplash.com/photo-1601758123927-196e2b1a56c5?w=500" 
+    alt="Cute puppy with flowers"
   >
-  <br><br>
-  <button id="yes" onclick="alert('YAY 💖 I knew it!!!')">Yes</button>
-  <button id="no">No</button>
+
+  <div class="buttons">
+    <button id="yes" onclick="alert('YAY 💖 I knew it!!!')">Yes</button>
+    <button id="no">No</button>
+  </div>
+</div>
 
 <script>
   const noBtn = document.getElementById("no");
+
   noBtn.addEventListener("mouseover", () => {
-    noBtn.style.left = Math.random() * 80 + "vw";
-    noBtn.style.top = Math.random() * 80 + "vh";
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 80;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
 </script>
-  <script>
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.innerHTML = "💗";
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.top = "100vh";
-    heart.style.fontSize = "24px";
-    heart.style.animation = "floatUp 4s linear";
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 4000);
-  }, 500);
-</script>
-
-<style>
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-110vh); opacity: 0; }
-}
-</style>
 
 </body>
 </html>
